@@ -1,16 +1,22 @@
 {
-  "id": "coolcode-tool-template",
-  "title": "CoolCode Tool Starter",
-  "description": "A browser-only example that trims lines and removes exact duplicates.",
-  "category": "security",
-  "tags": ["text", "lines", "duplicates"],
-  "icon": "scan-search",
-  "url": "/coolcode-tool-template/",
-  "source": "https://github.com/jsdyer/coolcode-tool-template",
+  "id": "formatshift",
+  "title": "Format Shift",
+  "description": "Trace an album through vinyl, tape, disc and digital editions with MusicBrainz metadata.",
+  "category": "media",
+  "tags": [
+    "music",
+    "formats",
+    "vinyl",
+    "discography",
+    "archives"
+  ],
+  "icon": "film",
+  "url": "/formatshift/",
+  "source": "https://github.com/jsdyer/formatshift",
   "hosting": "project",
   "access": "browser",
   "data_info": {
-    "mode": "local",
-    "detail": "The browser reads the text you paste and compares its lines."
+    "mode": "mixed",
+    "detail": "MusicBrainz release metadata, with a retained edition selection and on-demand artist and release searches."
   }
 }

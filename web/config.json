@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "apiBase": "https://musicbrainz.org/ws/2/",
+  "requestIntervalMs": 1200,
+  "pageSize": 50,
+  "maxLoadedReleases": 500,
+  "artistSearchLimit": 8,
+  "presets": [
+    {"label": "Rush", "query": "Rush"},
+    {"label": "Sarah McLachlan", "query": "Sarah McLachlan"},
+    {"label": "Sloan", "query": "Sloan"},
+    {"label": "Depeche Mode", "query": "Depeche Mode"}
+  ],
+  "opening": {
+    "title": "Moving Pictures · Rush",
+    "releaseGroupId": "40e30dc1-55ac-33e1-85d3-1f1508140bfc",
+    "artistId": "534ee493-bfac-4575-a44a-0ae41e2c3fe4",
+    "artistName": "Rush",
+    "releaseIds": [
+      "fecf8eef-cbb6-49b3-bc7d-b2912766cacc",
+      "0e5a6674-7f01-45cc-9da2-0d497612544e",
+      "42837e66-92a1-3694-97a5-d84ad5b844be",
+      "b32a225a-c0a8-4925-bf15-98a25fa89293",
+      "715c7e25-4e52-428c-8b66-f12dd3f3c914",
+      "c74180d4-bd18-4621-9cff-275e61ef10b5",
+      "0af84241-0e38-4e0d-ba6e-60a8c9409931",
+      "f6ac3eb7-08cd-4718-adce-54a247723a37"
+    ]
+  }
+}

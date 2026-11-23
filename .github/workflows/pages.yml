@@ -1,4 +1,4 @@
-name: Browser tool · Check and publish
+name: Format Shift · Check and publish
 on:
   pull_request:
   push:
@@ -6,26 +6,59 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: formatshift-pages-${{ github.ref }}
+  cancel-in-progress: false
 jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    permissions:
+      contents: write
     outputs:
       publish: ${{ steps.identity.outputs.publish }}
     steps:
       - uses: actions/checkout@v6
         with:
-          persist-credentials: false
+          persist-credentials: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+          fetch-depth: 0
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
       - uses: actions/setup-node@v6
         with:
           node-version: '24'
+      - name: Refresh the opening collection when its config changes
+        id: collection
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
+          AFTER_SHA: ${{ github.sha }}
+        run: python3 scripts/refresh_ci.py
       - name: Test the application
         run: node --test tests/*.test.mjs
       - name: Test the builder
         run: python3 -m unittest discover -s tests -v
+      - name: Persist the successful opening receipt
+        if: steps.collection.outputs.refreshed == 'true'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- web/data/opening.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Refresh configured MusicBrainz opening editions'
+            if ! git push origin HEAD:main; then
+              echo '::warning::Receipt could not be persisted without overwriting newer work. Restoring the previous receipt for this build; the successful API capture remains in the artifact.'
+              git show "$GITHUB_SHA:web/data/opening.json" > web/data/opening.json
+            fi
+          fi
+      - name: Save live collection evidence
+        if: always() && steps.collection.outputs.refreshed == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: collection-checks
+          path: collection-checks/
+          retention-days: 30
       - name: Build the static application
         run: python3 scripts/build.py
       - name: Check whether the tool has been initialized

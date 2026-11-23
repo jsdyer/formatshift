@@ -1,21 +1,22 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { cleanLines } from '../web/model.mjs';
-test('trims, removes blanks and preserves first-seen order', () => {
-  assert.deepEqual(cleanLines('  Halifax\nLangley\nHalifax\n\nVancouver  '), {
-    text: 'Halifax\nLangley\nVancouver', count: 3, removed: 1,
-  });
-});
-test('supports Windows and old Mac line endings', () => {
-  assert.equal(cleanLines('a\r\nb\ra').text, 'a\nb');
-});
-test('empty text and whitespace produce an empty result', () => {
-  assert.deepEqual(cleanLines(' \n\t'), { text: '', count: 0, removed: 0 });
-});
-test('preserves case and Unicode', () => {
-  assert.equal(cleanLines('Québec\nquébec\n東京\nQuébec').text, 'Québec\nquébec\n東京');
-});
-test('treats markup as ordinary text', () => {
-  assert.equal(cleanLines('<script>alert(1)</script>\n<script>alert(1)</script>').text, '<script>alert(1)</script>');
-});
-test('rejects non-text input', () => { assert.throws(() => cleanLines(null), TypeError); });
+import {readFile} from 'node:fs/promises';
+import {parseId,dateParts,family,normalizeRelease,validateConfig,artistQuery,mergePages,nextOffset,filterReleases,summarize,receipt,csv,createQueue,requestURL} from '../web/model.mjs';
+import {upstreamURL} from '../server/musicbrainz-proxy.mjs';
+const opening=JSON.parse(await readFile(new URL('./fixtures/release-sample.json',import.meta.url)));
+const retained=JSON.parse(await readFile(new URL('../web/data/opening.json',import.meta.url)));
+const config=JSON.parse(await readFile(new URL('../web/config.json',import.meta.url)));
+const releases=opening.releases.map(normalizeRelease);
+test('real opening provenance, unique IDs, source and valid core fields',()=>{const rows=receipt(retained).releases;assert.ok(rows.length>0);assert.equal(new Set(rows.map(r=>r.id)).size,rows.length);assert.match(retained.source,/musicbrainz.org\//);rows.forEach(normalizeRelease);});
+test('IDs accept the correct MusicBrainz entity, reject other hosts and malformed IDs',()=>{const id=releases[0].id;assert.equal(parseId('https://musicbrainz.org/release/'+id),id);assert.throws(()=>parseId('https://evil.example/release/'+id));assert.throws(()=>parseId('https://musicbrainz.org/artist/'+id));assert.throws(()=>parseId('not-an-id'));});
+test('partial dates preserve precision, invalid dates never become invented years',()=>{assert.deepEqual(dateParts('1983-08'),{raw:'1983-08',year:1983,precision:'month'});assert.equal(dateParts('1981').precision,'year');assert.equal(dateParts('2024-02-29').precision,'day');for(const date of ['1981-15','2023-02-29','',null,'2020-01-001'])assert.equal(dateParts(date).year,null);});
+test('format families retain mixed media and unknown data',()=>{assert.equal(family('MiniDisc'),'MiniDisc');assert.equal(family('SHM-CD'),'CD');assert.equal(family('12" Vinyl'),'Vinyl');assert.equal(family('Blu-ray'),'Other');assert.equal(family(null),'Unspecified');const box=releases.find(r=>r.media.length===9);assert.deepEqual(box.formats,['Vinyl','CD','Other']);assert.equal(box.media.length,9);});
+test('aggregation is edition count per family, not track, medium or market count',()=>{const box=releases.find(r=>r.media.length===9);const s=summarize([box]);assert.equal(s.formats.find(f=>f.name==='CD').count,1);assert.equal(s.media,9);assert.equal(s.decades[0].year,2020);});
+test('config expansion needs no new source code and invalid rate bounds rejected',()=>{const extra={...config,presets:[...config.presets,{label:'New artist',query:'Any artist'}],opening:{...config.opening,releaseIds:[...config.opening.releaseIds,releases[0].id]}};assert.equal(validateConfig(extra).presets.at(-1).query,'Any artist');assert.throws(()=>validateConfig({...config,requestIntervalMs:999}));assert.throws(()=>validateConfig({...config,pageSize:101}));});
+test('query quotes and API parameter escaping cannot alter the request structure',()=>{assert.equal(artistQuery('A "B"'),'artist:"A \\"B\\""'.replace('\\\\','\\'));const u=new URL(requestURL(config,'artist',{query:artistQuery('Rush & test'),limit:8}));assert.equal(u.searchParams.get('query'),'artist:"Rush & test"');assert.equal(u.searchParams.size,3);});
+test('paging respects source offsets, deduplicates IDs and stops at configured max',()=>{assert.equal(nextOffset(50,50,140,500),100);assert.equal(nextOffset(100,40,140,500),null);assert.equal(nextOffset(50,50,140,100),null);assert.equal(nextOffset(50,0,140,100),null);assert.equal(mergePages(opening.releases.slice(0,2),opening.releases,3).length,3);});
+test('filters preserve unknown dates unless year filtering requested',()=>{const undated=normalizeRelease({...opening.releases[0],date:''});assert.equal(filterReleases([undated],{}).length,1);assert.equal(filterReleases([undated],{from:1900}).length,0);assert.equal(filterReleases(releases,{format:'Cassette'}).length,1);assert.equal(filterReleases(releases,{from:2010,to:2019}).length,2);assert.equal(filterReleases(releases,{country:'JP'}).length,1);});
+test('receipt validation refuses incomplete provenance and malformed records',()=>{assert.throws(()=>receipt({...opening,capturedAt:'yesterday'}));assert.throws(()=>receipt({...opening,releases:[{id:'bad',title:'x'}]}));});
+test('CSV avoids spreadsheet formulas and marks partial dates',()=>{const out=csv([{...releases[0],title:'=HYPERLINK("x")'}]);assert.ok(out.includes('"\'=HYPERLINK'));assert.ok(csv(releases).includes('"month"'));});
+test('serial queue spaces calls and recovers after a failed request',async()=>{let now=0,active=0,peak=0;const starts=[];const queue=createQueue(1200,{clock:()=>now,sleep:async ms=>{now+=ms;}});const call=bad=>queue(async()=>{starts.push(now);active++;peak=Math.max(peak,active);await Promise.resolve();active--;if(bad)throw new Error('upstream');return 1;});const results=await Promise.allSettled([call(false),call(true),call(false)]);assert.deepEqual(starts,[0,1200,2400]);assert.equal(peak,1);assert.equal(results[2].status,'fulfilled');});
+test('server adapter only permits bounded metadata endpoints',()=>{const id=releases[0].id;assert.match(upstreamURL(`/ws/2/release/${id}?inc=artist-credits%2Bmedia%2Blabels%2Brelease-groups`),/^https:\/\/musicbrainz.org\//);assert.throws(()=>upstreamURL('/https://evil.example'));assert.throws(()=>upstreamURL('/ws/2/artist?query=x&limit=500'));assert.throws(()=>upstreamURL('/ws/2/artist?query=x&url=https://evil.example'));assert.throws(()=>upstreamURL('/ws/2/release?artist=bad'));});

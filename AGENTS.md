@@ -26,3 +26,10 @@
   the extra practical detail in the hub README. Only the short source sentence
   belongs in the homepage record. Import the note with `scripts/sync_guides.py
   --tool TOOL_ID` in the hub before regenerating its README.
+- Presets are starting points, not the supported universe. Keep artist names,
+  MusicBrainz IDs, pagination limits and opening IDs editable in web/config.json.
+  Derive all displayed counts from loaded records. Do not replace real snapshots
+  with fixtures or claim a selected/paged set is a complete artist discography.
+- Keep MusicBrainz requests serial and spaced at least 1.1 seconds apart. Collectors
+  and adapters must identify this app with its public contact URL. Browser scripts
+  must not claim to set a User-Agent header that Chromium silently removes.

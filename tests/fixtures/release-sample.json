@@ -1,0 +1,355 @@
+{
+  "schemaVersion": 1,
+  "title": "Moving Pictures · Rush",
+  "capturedAt": "2026-11-23T06:10:42+00:00",
+  "method": "Selected core fields transcribed from MusicBrainz release-group table; not a complete discography or an API capture.",
+  "source": "https://musicbrainz.org/release-group/40e30dc1-55ac-33e1-85d3-1f1508140bfc",
+  "releases": [
+    {
+      "id": "fecf8eef-cbb6-49b3-bc7d-b2912766cacc",
+      "title": "Moving Pictures",
+      "date": "1981-02-06",
+      "country": "CA",
+      "disambiguation": "",
+      "status": "Official",
+      "barcode": "",
+      "artist-credit": [
+        {
+          "name": "Rush",
+          "artist": {
+            "id": "534ee493-bfac-4575-a44a-0ae41e2c3fe4",
+            "name": "Rush"
+          }
+        }
+      ],
+      "release-group": {
+        "id": "40e30dc1-55ac-33e1-85d3-1f1508140bfc",
+        "title": "Moving Pictures"
+      },
+      "media": [
+        {
+          "position": 1,
+          "format": "12\" Vinyl",
+          "track-count": 7
+        }
+      ],
+      "label-info": [
+        {
+          "label": {
+            "name": "Anthem Records"
+          },
+          "catalog-number": "ANR-1-1030"
+        }
+      ]
+    },
+    {
+      "id": "0e5a6674-7f01-45cc-9da2-0d497612544e",
+      "title": "Moving Pictures",
+      "date": "1981",
+      "country": "US",
+      "disambiguation": "",
+      "status": "Official",
+      "barcode": "042282254948",
+      "artist-credit": [
+        {
+          "name": "Rush",
+          "artist": {
+            "id": "534ee493-bfac-4575-a44a-0ae41e2c3fe4",
+            "name": "Rush"
+          }
+        }
+      ],
+      "release-group": {
+        "id": "40e30dc1-55ac-33e1-85d3-1f1508140bfc",
+        "title": "Moving Pictures"
+      },
+      "media": [
+        {
+          "position": 1,
+          "format": "Cassette",
+          "track-count": 7
+        }
+      ],
+      "label-info": [
+        {
+          "label": {
+            "name": "PolyGram"
+          },
+          "catalog-number": "822 549-4 M-1"
+        }
+      ]
+    },
+    {
+      "id": "42837e66-92a1-3694-97a5-d84ad5b844be",
+      "title": "Moving Pictures",
+      "date": "1983-08",
+      "country": "US",
+      "disambiguation": "",
+      "status": "Official",
+      "barcode": "042280004828",
+      "artist-credit": [
+        {
+          "name": "Rush",
+          "artist": {
+            "id": "534ee493-bfac-4575-a44a-0ae41e2c3fe4",
+            "name": "Rush"
+          }
+        }
+      ],
+      "release-group": {
+        "id": "40e30dc1-55ac-33e1-85d3-1f1508140bfc",
+        "title": "Moving Pictures"
+      },
+      "media": [
+        {
+          "position": 1,
+          "format": "CD",
+          "track-count": 7
+        }
+      ],
+      "label-info": [
+        {
+          "label": {
+            "name": "Mercury Records"
+          },
+          "catalog-number": "800 048-2"
+        }
+      ]
+    },
+    {
+      "id": "b32a225a-c0a8-4925-bf15-98a25fa89293",
+      "title": "Moving Pictures",
+      "date": "1988-08-26",
+      "country": "JP",
+      "disambiguation": "",
+      "status": "Official",
+      "barcode": "4988010223458",
+      "artist-credit": [
+        {
+          "name": "Rush",
+          "artist": {
+            "id": "534ee493-bfac-4575-a44a-0ae41e2c3fe4",
+            "name": "Rush"
+          }
+        }
+      ],
+      "release-group": {
+        "id": "40e30dc1-55ac-33e1-85d3-1f1508140bfc",
+        "title": "Moving Pictures"
+      },
+      "media": [
+        {
+          "position": 1,
+          "format": "CD",
+          "track-count": 7
+        }
+      ],
+      "label-info": [
+        {
+          "label": {
+            "name": "Epic"
+          },
+          "catalog-number": "25・8P-5076"
+        }
+      ]
+    },
+    {
+      "id": "715c7e25-4e52-428c-8b66-f12dd3f3c914",
+      "title": "Moving Pictures",
+      "date": "2011-04-05",
+      "country": "",
+      "disambiguation": "2011 remaster",
+      "status": "Official",
+      "barcode": "00602527636993",
+      "artist-credit": [
+        {
+          "name": "Rush",
+          "artist": {
+            "id": "534ee493-bfac-4575-a44a-0ae41e2c3fe4",
+            "name": "Rush"
+          }
+        }
+      ],
+      "release-group": {
+        "id": "40e30dc1-55ac-33e1-85d3-1f1508140bfc",
+        "title": "Moving Pictures"
+      },
+      "media": [
+        {
+          "position": 1,
+          "format": "Digital Media",
+          "track-count": 7
+        }
+      ],
+      "label-info": [
+        {
+          "label": {
+            "name": "Mercury Records"
+          },
+          "catalog-number": ""
+        }
+      ]
+    },
+    {
+      "id": "c74180d4-bd18-4621-9cff-275e61ef10b5",
+      "title": "Moving Pictures",
+      "date": "2015-07-24",
+      "country": "US",
+      "disambiguation": "2015 remaster",
+      "status": "Official",
+      "barcode": "602547118080",
+      "artist-credit": [
+        {
+          "name": "Rush",
+          "artist": {
+            "id": "534ee493-bfac-4575-a44a-0ae41e2c3fe4",
+            "name": "Rush"
+          }
+        }
+      ],
+      "release-group": {
+        "id": "40e30dc1-55ac-33e1-85d3-1f1508140bfc",
+        "title": "Moving Pictures"
+      },
+      "media": [
+        {
+          "position": 1,
+          "format": "12\" Vinyl",
+          "track-count": 7
+        }
+      ],
+      "label-info": [
+        {
+          "label": {
+            "name": "Anthem Records / Mercury Records"
+          },
+          "catalog-number": "B0022380-01"
+        }
+      ]
+    },
+    {
+      "id": "0af84241-0e38-4e0d-ba6e-60a8c9409931",
+      "title": "Moving Pictures",
+      "date": "2022-04-15",
+      "country": "XW",
+      "disambiguation": "40th anniversary super deluxe edition",
+      "status": "Official",
+      "barcode": "602435876405",
+      "artist-credit": [
+        {
+          "name": "Rush",
+          "artist": {
+            "id": "534ee493-bfac-4575-a44a-0ae41e2c3fe4",
+            "name": "Rush"
+          }
+        }
+      ],
+      "release-group": {
+        "id": "40e30dc1-55ac-33e1-85d3-1f1508140bfc",
+        "title": "Moving Pictures"
+      },
+      "media": [
+        {
+          "position": 1,
+          "format": "CD",
+          "track-count": 7
+        },
+        {
+          "position": 2,
+          "format": "CD",
+          "track-count": 11
+        },
+        {
+          "position": 3,
+          "format": "CD",
+          "track-count": 8
+        },
+        {
+          "position": 4,
+          "format": "Blu-ray",
+          "track-count": 25
+        },
+        {
+          "position": 5,
+          "format": "Vinyl",
+          "track-count": 7
+        },
+        {
+          "position": 6,
+          "format": "Vinyl",
+          "track-count": 7
+        },
+        {
+          "position": 7,
+          "format": "Vinyl",
+          "track-count": 5
+        },
+        {
+          "position": 8,
+          "format": "Vinyl",
+          "track-count": 5
+        },
+        {
+          "position": 9,
+          "format": "Vinyl",
+          "track-count": 2
+        }
+      ],
+      "label-info": [
+        {
+          "label": {
+            "name": "Anthem Entertainment / Anthem Records"
+          },
+          "catalog-number": "B0033609-00"
+        }
+      ]
+    },
+    {
+      "id": "f6ac3eb7-08cd-4718-adce-54a247723a37",
+      "title": "Moving Pictures",
+      "date": "2022-04-15",
+      "country": "XW",
+      "disambiguation": "40th anniversary deluxe edition",
+      "status": "Official",
+      "barcode": "602435876597",
+      "artist-credit": [
+        {
+          "name": "Rush",
+          "artist": {
+            "id": "534ee493-bfac-4575-a44a-0ae41e2c3fe4",
+            "name": "Rush"
+          }
+        }
+      ],
+      "release-group": {
+        "id": "40e30dc1-55ac-33e1-85d3-1f1508140bfc",
+        "title": "Moving Pictures"
+      },
+      "media": [
+        {
+          "position": 1,
+          "format": "CD",
+          "track-count": 7
+        },
+        {
+          "position": 2,
+          "format": "CD",
+          "track-count": 11
+        },
+        {
+          "position": 3,
+          "format": "CD",
+          "track-count": 8
+        }
+      ],
+      "label-info": [
+        {
+          "label": {
+            "name": "Mercury Records / Anthem Records"
+          },
+          "catalog-number": "00602435876597, B0033610-02"
+        }
+      ]
+    }
+  ]
+}

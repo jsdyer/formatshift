@@ -1,34 +1,12 @@
 <!doctype html>
-<html lang="en-CA">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="{{DESCRIPTION}}">
-  <title>{{TITLE}} · CoolCode</title>
-  <link rel="stylesheet" href="./style.css">
-  <script type="module" src="./app.mjs"></script>
-  {{VISIT_COUNTER}}
-</head>
-<body data-tool-id="{{TOOL_ID}}">
-  <a class="skip" href="#main">Skip to content</a>
-  <header><a href="https://coolcode.ca/">← CoolCode.ca</a><a href="{{SOURCE_URL}}">Source &amp; instructions ↗</a></header>
-  <main id="main">
-    <p class="eyebrow">Browser tool starter</p>
-    <h1>{{TITLE}}</h1>
-    <p class="intro">{{DESCRIPTION}}</p>
-    <section aria-labelledby="example-title">
-      <h2 id="example-title">Clean a list</h2>
-      <p>Trim spaces, skip blank lines and remove exact duplicates. Capitalization stays distinct.</p>
-      <div class="panels">
-        <div><label for="input">Your lines</label><textarea id="input" rows="10" maxlength="100000" spellcheck="false" placeholder="Paste one item per line"></textarea></div>
-        <div><label for="output">Cleaned lines</label><textarea id="output" rows="10" readonly spellcheck="false"></textarea></div>
-      </div>
-      <div class="actions"><button id="sample" type="button">Load example</button><button id="clear" type="button">Clear</button><button id="copy" type="button" hidden>Copy result</button></div>
-      <p id="status" role="status" aria-live="polite">Paste a list to begin.</p>
-      <noscript><p>This tool needs JavaScript to process your text. The source is available above.</p></noscript>
-    </section>
-    <aside aria-label="Privacy"><strong>Stays on your device.</strong> The browser processes your text in this tab. Reloading clears it.</aside>
-  </main>
-  <footer>Part of <a href="https://coolcode.ca/">the CoolCode collection</a>. {{ISSUE_LINK}}</footer>
-</body>
-</html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="{{DESCRIPTION}}"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="theme-color" content="#ef5c35"><title>{{TITLE}} · CoolCode</title><link rel="stylesheet" href="./style.css">{{VISIT_COUNTER}}<script type="module" src="./app.mjs"></script></head>
+<body data-tool="{{TOOL_ID}}"><header class="topbar"><a href="https://coolcode.ca/">CoolCode.ca</a><span>THE MUSIC METADATA WORKBENCH</span><a href="#about">Sources & method ↘</a></header>
+<main>
+<section class="hero"><div><p class="eyebrow">FROM THE RECORD CRATE TO THE HARD DRIVE</p><h1>Format<br><em>Shift.</em></h1><p class="intro">Same music. Different object.<br>Follow an album through vinyl, tape, disc and digital editions.</p></div><div class="sleeve" aria-hidden="true"><div class="disc"><div class="disc-label"><span>FORMAT<br>SHIFT</span><i></i><small>33⅓ · 45 · ∞</small></div></div><div class="sleeve-bottom"><span>A RECORD OF<br>THE RECORDS</span><span>FS—001<br>STEREO</span></div></div></section>
+<section class="search-block" aria-labelledby="search-title"><div class="section-label"><span>01 / FIND YOUR MUSIC</span><span>POWERED BY MUSICBRAINZ</span></div><h2 id="search-title">Start with an artist. Or an exact edition.</h2><form id="search-form"><label>Search by<select id="search-mode"><option value="artist">Artist name</option><option value="release">Release ID / link</option><option value="release-group">Album / release-group ID</option></select></label><label class="grow"><span id="query-label">Artist name</span><input id="query" required maxlength="240" placeholder="e.g. Sarah McLachlan" autocomplete="off"></label><button id="search-submit" class="primary" type="submit">Explore ↗</button></form><div class="presets"><span>Try an artist:</span><div id="presets"></div><button class="text-button" id="opening">Open retained Rush selection</button></div><p class="small">Artist searches and IDs go to MusicBrainz when you press Explore. No account or key needed. Nothing plays automatically.</p><div id="artist-results" aria-label="Choose an artist"></div><p id="status" role="status" aria-live="polite">Loading the retained edition selection…</p><a id="source-search" hidden target="_blank" rel="noopener" href="https://musicbrainz.org/search">Open this search at MusicBrainz ↗</a></section>
+<section class="collection" aria-labelledby="collection-title"><div class="collection-heading"><div><p class="eyebrow" id="collection-mode">RETAINED SELECTION</p><h2 id="collection-title">Moving Pictures · Rush</h2><p id="coverage" class="muted"></p></div><div class="export-controls"><button id="save-csv">Export visible CSV ↓</button><button id="save-json">Save receipt ↓</button><label class="file-button">Import receipt<input id="import" type="file" accept="application/json,.json"></label></div></div><div id="metrics" class="metrics"></div><div class="chart-block"><div><h3>Formats through the decades</h3><p class="small">Release counts in this view. A mixed-format box can appear in more than one colour. These are editions, not sales.</p></div><div id="legend" class="legend"></div><div id="timeline" class="timeline" aria-label="Loaded releases by decade and format"></div><p class="small" id="chart-note"></p></div>
+<div class="filters"><label class="grow">Filter loaded editions<input id="filter-text" placeholder="Title, remaster, artist…" type="search"></label><label>Format<select id="filter-format"><option value="">All formats</option></select></label><label>Country<select id="filter-country"><option value="">All countries</option></select></label><label>From year<input id="filter-from" type="number" min="1000" max="9999" placeholder="Any"></label><label>To year<input id="filter-to" type="number" min="1000" max="9999" placeholder="Any"></label><button id="reset-filters">Reset</button></div>
+<div class="edition-top"><h3 id="edition-count">Editions</h3><p>Choose any two editions to compare below.</p></div><div id="editions" class="editions"></div><div class="more-row"><button id="load-more" hidden>Load more editions</button><button id="refresh-opening">Fetch all editions of this album ↗</button><p id="page-note" class="small"></p></div>
+<section id="comparison" class="comparison" aria-labelledby="compare-title"><div class="edition-top"><h3 id="compare-title">Edition comparison</h3><button id="clear-comparison" class="text-button">Clear selection</button></div><p id="comparison-help" class="muted">Choose two editions above to compare their format, reported date, labels and media.</p><div id="compare-cards" class="compare-cards"></div></section></section>
+<details id="about"><summary>Sources, date meanings & privacy</summary><div class="about-grid"><section><h3>MusicBrainz, with context</h3><p>Community-maintained <a href="https://musicbrainz.org/doc/About/Data_License">core metadata (CC0)</a>. A release is one particular edition; a release group brings editions together. Format belongs to each medium, so one box may contain CD, vinyl and Blu-ray.</p><p>Dates are reported edition dates, not recording dates or the date we retrieved the record. Partial dates stay partial. Missing dates and countries stay unknown. Check the original record if a date or format looks unusual.</p><p>Initial records are a deliberately selected set, not a representative sample. Live artist browsing is paged and may include compilations; loaded records are not the entire artist catalogue.</p></section><section><h3>Your session</h3><p>Searching sends your artist name or MusicBrainz ID and your IP address to MusicBrainz. Filters, comparisons and imported files stay in this tab. Receipts contain the visible collection's metadata and capture time. Downloads happen only when requested.</p><p>No audio, lyrics, artwork, accounts or API keys are collected. Local imports are never uploaded. A request timestamp may be stored to coordinate API pacing across tabs; searches and results are not saved on this device.</p><p id="provenance"></p><p><a href="https://musicbrainz.org/doc/MusicBrainz_API">MusicBrainz API</a> · <a href="https://musicbrainz.org/doc/MusicBrainz_API/Rate_Limiting">Rate limits</a></p></section></div></details>
+</main><footer><a href="https://coolcode.ca/">More things to explore at CoolCode.ca ↗</a><div><a href="{{SOURCE_URL}}">Source & customization</a>{{ISSUE_LINK}}</div></footer></body></html>
